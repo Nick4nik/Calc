@@ -2,15 +2,18 @@
 using System.Windows.Forms;
 namespace Калькулятор
 {
-    public partial class Form1 : Form
+    public partial class Calc : Form
     {
-        public Form1()
+        public Calc()
         {
             InitializeComponent();
         }
 
         float firstVal, secondVal, endVal;
-        int count, curop;
+        int count;
+        readonly string a = " / ", b = " * ", c = " - ", d = " + ";
+        bool op;
+
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
@@ -139,7 +142,7 @@ namespace Калькулятор
             {
                 if (textBox1.Text != string.Empty)
                     textBox1.Text += ",";
-                else if (textBox1.Text == string.Empty)
+                else
                     textBox1.Text = "0,";
             }
         }
@@ -148,151 +151,113 @@ namespace Калькулятор
         #region Операции
         private void buttonDivide_Click(object sender, EventArgs e)
         {
-            if (curop != 1)
+            if (firstVal == 0 && textBox1.Text != String.Empty)
             {
-                curop = 1;
-                if (textBox1.Text == String.Empty)
-                {
-                    textBox2.Text = firstVal + " / ";
-                }
-                else
-                {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " / ";
-                }
-                count = 1;
+                firstVal = float.Parse(textBox1.Text);
+                textBox2.Text = firstVal + a;
             }
-
             else
             {
-                curop = 1;
-                if (textBox1.Text == String.Empty)
+                if (endVal == 0 && op == true)
                 {
-                    firstVal = 0;
-                    textBox2.Text = firstVal.ToString() + " / ";
+                    if (textBox1.Text == String.Empty)
+                    {
+                        textBox2.Text = firstVal + a;
+                    }
+                    textBox2.Text = firstVal.ToString() + a;
                 }
                 else
                 {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " / ";
+                    firstVal = endVal;
+                    textBox2.Text = firstVal.ToString() + a;
                 }
-                count = 1;
             }
-
+            textBox1.Text = String.Empty;
+            count = 1;
         }
 
         private void buttonMultiply_Click(object sender, EventArgs e)
         {
-            if (curop != 2)
+            if (firstVal == 0 && textBox1.Text != String.Empty)
             {
-                curop = 2;
-                if (textBox1.Text == String.Empty)
-                {
-                    textBox2.Text = firstVal + " * ";
-                }
-                else
-                {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " * ";
-                }
-                count = 2;
+                firstVal = float.Parse(textBox1.Text);
+                textBox2.Text = firstVal + b;
             }
-
             else
             {
-                curop = 2;
-                if (textBox1.Text == String.Empty)
+                if (endVal == 0 && op == true)
                 {
-                    firstVal = 0;
-                    textBox2.Text = firstVal.ToString() + " * ";
+                    if (textBox1.Text == String.Empty)
+                    {
+                        textBox2.Text = firstVal + b;
+                    }
+                    textBox2.Text = firstVal.ToString() + b;
                 }
                 else
                 {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " * ";
+                    firstVal = endVal;
+                    textBox2.Text = firstVal.ToString() + b;
                 }
-                count = 2;
             }
+            textBox1.Text = String.Empty;
+            count = 2;
         }
 
         private void buttonMinus_Click(object sender, EventArgs e)
         {
-            if (curop != 3)
+            if (firstVal == 0 && textBox1.Text != String.Empty)
             {
-                curop = 3;
-                if (textBox1.Text == String.Empty)
-                {
-                    textBox2.Text = firstVal + " - ";
-                }
-                else
-                {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " - ";
-                }
-                count = 3;
+                firstVal = float.Parse(textBox1.Text);
+                textBox2.Text = firstVal + c;
             }
-
             else
             {
-                curop = 3;
-                if (textBox1.Text == String.Empty)
+                if (endVal == 0 && op != true)
                 {
-                    firstVal = 0;
-                    textBox2.Text = firstVal.ToString() + " - ";
+                    if (textBox1.Text == String.Empty)
+                    {
+                        textBox2.Text = firstVal + c;
+                    }
+                    textBox2.Text = firstVal.ToString() + c;
                 }
                 else
                 {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " - ";
+                    firstVal = endVal;
+                    textBox2.Text = firstVal.ToString() + c;
                 }
-                count = 3;
             }
+            textBox1.Text = String.Empty;
+            count = 3;
         }
 
         private void buttonPlus_Click(object sender, EventArgs e)
         {
-            if (curop != 4)
+            if (firstVal == 0 && textBox1.Text != String.Empty)
             {
-                curop = 4;
-                if (textBox1.Text == String.Empty)
-                {
-                    textBox2.Text = firstVal + " + ";
-                }
-                else
-                {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " + ";
-                }
-                count = 4;
+                firstVal = float.Parse(textBox1.Text);
+                textBox2.Text = firstVal + d;
             }
-
             else
             {
-                curop = 4;
-                if (textBox1.Text == String.Empty)
+                if (endVal == 0 && op != true)
                 {
-                    firstVal = 0;
-                    textBox2.Text = firstVal.ToString() + " + ";
+                    if (textBox1.Text == String.Empty)
+                    {
+                        textBox2.Text = firstVal + d;
+                    }
+                    textBox2.Text = firstVal.ToString() + d;
                 }
                 else
                 {
-                    firstVal = float.Parse(textBox1.Text);
-                    textBox1.Text = string.Empty;
-                    textBox2.Text = firstVal.ToString() + " + ";
+                    firstVal = endVal;
+                    textBox2.Text = firstVal.ToString() + d;
                 }
-                count = 4;
             }
+            textBox1.Text = String.Empty;
+            count = 4;
         }
 
         #endregion 
-
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
@@ -300,18 +265,33 @@ namespace Калькулятор
             textBox2.Text = string.Empty;
             firstVal = 0;
             secondVal = 0;
+            endVal = 0;
             count = 0;
-            curop = 0;
+            op = false;
         }
 
         private void buttonCalc_Click(object sender, EventArgs e)
         {
-            if (curop == 0)
-            {
-                return;
-            }
-            else
-            {
+             if (count == 0)
+             {
+                if (textBox1.Text == String.Empty)
+                {
+                    textBox2.Text = "0 = 0";
+                    textBox1.Text = String.Empty;
+                }
+                else if (textBox1.Text == "0,")
+                {
+                    textBox1.Text = String.Empty;
+                    textBox2.Text = "0 = 0";
+                }
+                else
+                {
+                textBox2.Text = textBox1.Text + " = " + textBox1.Text;
+                textBox1.Text = String.Empty;
+                }
+             }
+             else
+             {
                 if (textBox1.Text == String.Empty)
                 {
                     secondVal = 0;
@@ -323,11 +303,10 @@ namespace Калькулятор
                     textBox2.Text += secondVal.ToString() + " = ";
                 }
                 calculate();
-                curop = 0;
-                firstVal = 0;
+                textBox1.Text = String.Empty;
+                count = 0;
                 secondVal = 0;
-                endVal = 0;
-            }
+             }
         }
 
         private void calculate()
@@ -337,7 +316,6 @@ namespace Калькулятор
                 case 1:
                     if (secondVal == 0)
                     {
-                        textBox1.Text = String.Empty;
                         textBox2.Text = String.Empty;
                         MessageBox.Show("Делить на ноль нельзя");
                         break;
@@ -345,31 +323,30 @@ namespace Калькулятор
                     else
                     {
                         endVal = firstVal / secondVal;
-                        textBox1.Text = String.Empty;
                         textBox2.Text += endVal.ToString();
-                        
+                        op = true;
                     }
                     break;
                 case 2:
                     if (String.IsNullOrEmpty(textBox1.Text)) secondVal = 0;
                     else secondVal = float.Parse(textBox1.Text);
                     endVal = firstVal * secondVal;
-                    textBox1.Text = String.Empty;
                     textBox2.Text += endVal.ToString();
+                    op = true;
                     break;
                 case 3:
                     if (String.IsNullOrEmpty(textBox1.Text)) secondVal = 0;
                     else secondVal = float.Parse(textBox1.Text);
                     endVal = firstVal - secondVal;
-                    textBox1.Text = String.Empty;
                     textBox2.Text += endVal.ToString();
+                    op = true;
                     break;
                 case 4:
                     if (String.IsNullOrEmpty(textBox1.Text)) secondVal = 0;
                     else secondVal = float.Parse(textBox1.Text);
                     endVal = firstVal + secondVal;
-                    textBox1.Text = String.Empty;
                     textBox2.Text += endVal.ToString();
+                    op = true;
                     break;
 
                 default:
