@@ -158,7 +158,7 @@ namespace Калькулятор
             }
             else
             {
-                if (endVal == 0 && op == true)
+                if (endVal == 0 && op != true)
                 {
                     if (textBox1.Text == String.Empty)
                     {
@@ -185,7 +185,7 @@ namespace Калькулятор
             }
             else
             {
-                if (endVal == 0 && op == true)
+                if (endVal == 0 && op != true)
                 {
                     if (textBox1.Text == String.Empty)
                     {
