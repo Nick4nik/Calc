@@ -134,6 +134,7 @@
             this.textBox1.Size = new System.Drawing.Size(346, 87);
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
             // 
             // textBox2
             // 
@@ -222,6 +223,7 @@
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(86, 50);
             this.buttonDelete.TabIndex = 1;
+            this.buttonDelete.TabStop = false;
             this.buttonDelete.Tag = "";
             this.buttonDelete.Text = "Delete";
             this.buttonDelete.UseVisualStyleBackColor = true;

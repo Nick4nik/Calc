@@ -12,15 +12,9 @@ namespace Калькулятор
         float firstVal, secondVal, endVal;
         int count, curop;
 
-        #region Числа
         protected override void OnKeyDown(KeyEventArgs e)
         {
-            if (textBox1.Focused)
-            {
-                return;
-            }
-            else
-                switch (e.KeyCode)
+            switch (e.KeyCode)
                 {
                     case Keys.NumPad0:
                         button0.PerformClick();
@@ -73,59 +67,68 @@ namespace Калькулятор
                     case Keys.Enter:
                         buttonCalc.PerformClick();
                         break;
+                    default:
+                        break;
                 }
             base.OnKeyDown(e);
             e.Handled = true;
         }
-        
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = true;
+        }
+
+        #region Числа
+
         private void button0_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "0";
+            textBox1.Text += "0";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "1";
+            textBox1.Text += "1";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "2";
+            textBox1.Text += "2";
         }
-        
+
         private void button3_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "3";
+            textBox1.Text += "3";
         }
-        
+
         private void button4_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "4";
+            textBox1.Text += "4";
         }
-        
+
         private void button5_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "5";
+            textBox1.Text += "5";
         }
-        
+
         private void button6_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "6";
+            textBox1.Text += "6";
         }
-        
+
         private void button7_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "7";
+            textBox1.Text += "7";
         }
-        
+
         private void button8_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "8";
+            textBox1.Text += "8";
         }
-        
+
         private void button9_Click(object sender, EventArgs e)
         {
-                textBox1.Text += "9";
+            textBox1.Text += "9";
         }
 
         private void buttonDot_Click(object sender, EventArgs e)
@@ -290,6 +293,7 @@ namespace Калькулятор
 
         #endregion 
 
+
         private void buttonDelete_Click(object sender, EventArgs e)
         {
             textBox1.Text = string.Empty;
@@ -308,26 +312,21 @@ namespace Калькулятор
             }
             else
             {
-                try
+                if (textBox1.Text == String.Empty)
+                {
+                    secondVal = 0;
+                    textBox2.Text += secondVal.ToString() + " = ";
+                }
+                else
                 {
                     secondVal = float.Parse(textBox1.Text);
-                    textBox2.Text += textBox1.Text + " = ";
+                    textBox2.Text += secondVal.ToString() + " = ";
                 }
-                catch
-                {
-                    if (firstVal == 0)
-                        textBox2.Text = "0";
-                    else
-                    {
-                        secondVal = 0;
-                        textBox2.Text += textBox1.Text + "0 = ";
-                    }
-                }
-                finally
-                {
-                    calculate();
-                    curop = 0;
-                }
+                calculate();
+                curop = 0;
+                firstVal = 0;
+                secondVal = 0;
+                endVal = 0;
             }
         }
 
@@ -340,9 +339,6 @@ namespace Калькулятор
                     {
                         textBox1.Text = String.Empty;
                         textBox2.Text = String.Empty;
-                        curop = 0;
-                        firstVal = 0;
-                        secondVal = 0;
                         MessageBox.Show("Делить на ноль нельзя");
                         break;
                     }
@@ -351,9 +347,7 @@ namespace Калькулятор
                         endVal = firstVal / secondVal;
                         textBox1.Text = String.Empty;
                         textBox2.Text += endVal.ToString();
-                        curop = 0;
-                        firstVal = 0;
-                        secondVal = 0;
+                        
                     }
                     break;
                 case 2:
@@ -362,9 +356,6 @@ namespace Калькулятор
                     endVal = firstVal * secondVal;
                     textBox1.Text = String.Empty;
                     textBox2.Text += endVal.ToString();
-                    curop = 0;
-                    firstVal = 0;
-                    secondVal = 0;
                     break;
                 case 3:
                     if (String.IsNullOrEmpty(textBox1.Text)) secondVal = 0;
@@ -372,9 +363,6 @@ namespace Калькулятор
                     endVal = firstVal - secondVal;
                     textBox1.Text = String.Empty;
                     textBox2.Text += endVal.ToString();
-                    curop = 0;
-                    firstVal = 0;
-                    secondVal = 0;
                     break;
                 case 4:
                     if (String.IsNullOrEmpty(textBox1.Text)) secondVal = 0;
@@ -382,9 +370,6 @@ namespace Калькулятор
                     endVal = firstVal + secondVal;
                     textBox1.Text = String.Empty;
                     textBox2.Text += endVal.ToString();
-                    curop = 0;
-                    firstVal = 0;
-                    secondVal = 0;
                     break;
 
                 default:
